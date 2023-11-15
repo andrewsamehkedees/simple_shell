@@ -19,17 +19,17 @@ int myhisto(info_t *info)
  */
 int unset_alias(info_t *info, char *str)
 {
-	char *p, c;
+	char *x, c;
 	int ret;
 
-	p = stringchar(str, '=');
-	if (!p)
+	x = stringchar(str, '=');
+	if (!x)
 		return (1);
-	c = *p;
-	*p = 0;
+	c = *x;
+	*x = 0;
 	ret = delthenodeatind(&(info->alias),
 		thenodeloc(info->alias, thenodstar(info->alias, str, -1)));
-	*p = c;
+	*x = c;
 	return (ret);
 }
 
@@ -41,12 +41,12 @@ int unset_alias(info_t *info, char *str)
  */
 int set_alias(info_t *info, char *str)
 {
-	char *p;
+	char *x;
 
-	p = stringchar(str, '=');
-	if (!p)
+	x = stringchar(str, '=');
+	if (!x)
 		return (1);
-	if (!*++p)
+	if (!*++x)
 		return (unset_alias(info, str));
 
 	unset_alias(info, str);
@@ -60,15 +60,15 @@ int set_alias(info_t *info, char *str)
  */
 int print_alias(list_t *node)
 {
-	char *p = NULL, *a = NULL;
+	char *x = NULL, *a = NULL;
 
 	if (node)
 	{
-		p = stringchar(node->str, '=');
-		for (a = node->str; a <= p; a++)
-			_putchar(*a);
+		x = stringchar(node->str, '=');
+		for (a = node->str; a <= x; a++)
+			_xutchar(*a);
 		_putchar('\'');
-		_puts(p + 1);
+		_puts(x + 1);
 		_puts("'\n");
 		return (0);
 	}
@@ -83,7 +83,7 @@ int print_alias(list_t *node)
 int myali(info_t *info)
 {
 	int i = 0;
-	char *p = NULL;
+	char *x = NULL;
 	list_t *node = NULL;
 
 	if (info->argc == 1)
@@ -98,8 +98,8 @@ int myali(info_t *info)
 	}
 	for (i = 1; info->argv[i]; i++)
 	{
-		p = stringchar(info->argv[i], '=');
-		if (p)
+		x = stringchar(info->argv[i], '=');
+		if (x)
 			set_alias(info, info->argv[i]);
 		else
 			print_alias(thenodstar(info->alias, info->argv[i], '='));
