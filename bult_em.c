@@ -7,12 +7,12 @@
  */
 int myqui(info_t *info)
 {
-	int exitcheck;
+	int testexit;
 
 	if (info->argv[1])
 	{
-		exitcheck = errortoint(info->argv[1]);
-		if (exitcheck == -1)
+		testexit = errortoint(info->argv[1]);
+		if (testexit == -1)
 		{
 			info->status = 2;
 			print_error(info, "Illegal number: ");
@@ -35,7 +35,7 @@ int myqui(info_t *info)
 int myloca(info_t *info)
 {
 	char *s, *dir, buffer[1024];
-	int chdir_ret;
+	int changdir;
 
 	s = getcwd(buffer, 1024);
 	if (!s)
@@ -44,10 +44,10 @@ int myloca(info_t *info)
 	{
 		dir = gettheenvi(info, "HOME=");
 		if (!dir)
-			chdir_ret = /* TODO: what should this be? */
+			changdir = /* TODO: what should this be? */
 				chdir((dir = gettheenvi(info, "PWD=")) ? dir : "/");
 		else
-			chdir_ret = chdir(dir);
+			changdir = chdir(dir);
 	}
 	else if (stringcomp(info->argv[1], "-") == 0)
 	{
@@ -58,12 +58,12 @@ int myloca(info_t *info)
 			return (1);
 		}
 		_puts(gettheenvi(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = /* TODO: what shoulad this be as dasd? */
+		changdir = /* TODO: what shoulad this be as dasd? */
 			chdir((dir = gettheenvi(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
-		chdir_ret = chdir(info->argv[1]);
-	if (chdir_ret == -1)
+		changdir = chdir(info->argv[1]);
+	if (changdir == -1)
 	{
 		print_error(info, "can't cd to ");
 		_eputs(info->argv[1]), _eputchar('\n');
@@ -83,11 +83,11 @@ int myloca(info_t *info)
  */
 int mysupp(info_t *info)
 {
-	char **arg_array;
+	char **arguarr;
 
-	arg_array = info->argv;
+	arguarr = info->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)
-		_puts(*arg_array);
+		_puts(*arguarr);
 	return (0);
 }
