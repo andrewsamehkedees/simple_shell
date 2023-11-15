@@ -44,8 +44,7 @@ int myloca(info_t *info)
 	{
 		dir = gettheenvi(info, "HOME=");
 		if (!dir)
-			changdir = /* TODO: what should this be? */
-				chdir((dir = gettheenvi(info, "PWD=")) ? dir : "/");
+			changdir = chdir((dir = gettheenvi(info, "PWD=")) ? dir : "/");
 		else
 			changdir = chdir(dir);
 	}
@@ -58,8 +57,7 @@ int myloca(info_t *info)
 			return (1);
 		}
 		_puts(gettheenvi(info, "OLDPWD=")), _putchar('\n');
-		changdir = /* TODO: what shoulad this be as dasd? */
-			chdir((dir = gettheenvi(info, "OLDPWD=")) ? dir : "/");
+		changdir = chdir((dir = gettheenvi(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		changdir = chdir(info->argv[1]);
