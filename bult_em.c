@@ -34,19 +34,19 @@ int myqui(info_t *info)
  */
 int myloca(info_t *info)
 {
-	char *s, *dir, buffer[1024];
-	int changdir;
+	char *s, *x, buffer[1024];
+	int changx;
 
 	s = getcwd(buffer, 1024);
 	if (!s)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
-		dir = gettheenvi(info, "HOME=");
-		if (!dir)
-			changdir = chdir((dir = gettheenvi(info, "PWD=")) ? dir : "/");
+		x = gettheenvi(info, "HOME=");
+		if (!x)
+			changx = chdir((x = gettheenvi(info, "PWD=")) ? x : "/");
 		else
-			changdir = chdir(dir);
+			changx = chdir(x);
 	}
 	else if (stringcomp(info->argv[1], "-") == 0)
 	{
@@ -57,11 +57,11 @@ int myloca(info_t *info)
 			return (1);
 		}
 		_puts(gettheenvi(info, "OLDPWD=")), _putchar('\n');
-		changdir = chdir((dir = gettheenvi(info, "OLDPWD=")) ? dir : "/");
+		changx = chdir((x = gettheenvi(info, "OLDPWD=")) ? x : "/");
 	}
 	else
-		changdir = chdir(info->argv[1]);
-	if (changdir == -1)
+		changx = chdir(info->argv[1]);
+	if (changx == -1)
 	{
 		print_error(info, "can't cd to ");
 		_eputs(info->argv[1]), _eputchar('\n');
